@@ -57,6 +57,24 @@ class ArtworksController < ApplicationController
     end
   end
 
+  def favorite
+    artwork = Artwork.find_by(id: params[:id], artist_id: params[:user_id])
+    if artwork
+      artwork.favorite = true
+      artwork.save
+    end
+    render json: artwork
+  end
+
+  def unfavorite
+    artwork = Artwork.find_by(id: params[:id], artist_id: params[:user_id])
+    if artwork
+      artwork.favorite = false
+      artwork.save
+    end
+    render json: artwork
+  end
+
   private
 
   def artwork_params

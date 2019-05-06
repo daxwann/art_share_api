@@ -10,10 +10,17 @@ Rails.application.routes.draw do
     member do
       post :like, to: 'artworks#like', as: 'like'
       post :unlike, to: 'artworks#unlike', as: 'unlike'
+      post :favorite, to: 'artworks#favorite', as: 'favorite'
+      post :unfavorite, to: 'artworks#unfavorite', as: 'unfavorite'
     end
   end
 
-  resources :artwork_shares, only: [:create, :destroy]
+  resources :artwork_shares, only: [:create, :destroy] do
+    member do
+      post :favorite, to: 'artwork_shares#favorite', as: 'favorite'
+      post :unfavorite, to: 'artwork_shares#unfavorite', as: 'unfavorite'
+    end
+  end
   resources :comments, only: [:create, :destroy] do
     member do
       post :like, to: 'comments#like', as: 'like'
