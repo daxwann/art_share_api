@@ -11,6 +11,7 @@ ActiveRecord::Base.transaction do
   Artwork.destroy_all
   ArtworkShare.destroy_all
   Comment.destroy_all
+  Like.destroy_all
   
   User.create!(username: 'Marcel')
   User.create!(username: 'Jasper')
@@ -58,4 +59,9 @@ ActiveRecord::Base.transaction do
   Comment.create!(body: "Beautiful", artwork_id: 8, author_id: 2)
   Comment.create!(body: "Exciting", artwork_id: 9, author_id: 4)
   Comment.create!(body: "Hot", artwork_id: 10, author_id: 1)
+
+  Like.create!(user_id: 1, likeable_type: 'Comment', likeable_id: 2)
+  Like.create!(user_id: 1, likeable_type: 'Artwork', likeable_id: 6)
+  Like.create!(user_id: 2, likeable_type: 'Artwork', likeable_id: 10)
+  Like.create!(user_id: 3, likeable_type: 'Comment', likeable_id: 7)
 end

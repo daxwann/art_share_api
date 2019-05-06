@@ -7,8 +7,17 @@ Rails.application.routes.draw do
 
   resources :artworks, only: [:create, :destroy, :show, :update] do
     resources :comments, only: [:index]
+    member do
+      post :like, to: 'artworks#like', as: 'like'
+      post :unlike, to: 'artworks#unlike', as: 'unlike'
+    end
   end
 
   resources :artwork_shares, only: [:create, :destroy]
-  resources :comments, only: [:create, :destroy]
+  resources :comments, only: [:create, :destroy] do
+    member do
+      post :like, to: 'comments#like', as: 'like'
+      post :unlike, to: 'comments#unlike', as: 'unlike'
+    end
+  end
 end
