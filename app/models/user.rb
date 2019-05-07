@@ -25,6 +25,12 @@ class User < ApplicationRecord
     class_name: :Like,
     dependent: :destroy
 
+  has_many :collections,
+    primary_key: :id,
+    foreign_key: :user_id,
+    class_name: :Collection,
+    dependent: :destroy
+
   has_many :shared_artworks,
     through: :artwork_shares,
     source: :artwork

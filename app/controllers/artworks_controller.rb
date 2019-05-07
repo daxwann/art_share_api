@@ -2,6 +2,8 @@ class ArtworksController < ApplicationController
   def index
     if params[:user_id]
       artworks = Artwork.artworks_for_user_id(params[:user_id])
+    elsif params[:collection_id]
+      artworks = Artwork.artworks_for_collection_id(params[:collection_id])
     end
     render json: artworks
   end

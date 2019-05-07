@@ -7,8 +7,13 @@ class Collection < ApplicationRecord
     foreign_key: :user_id,
     class_name: :User
 
-  has_many :artworks,
+  has_many :collection_artworks,
     primary_key: :id,
     foreign_key: :collection_id,
-    class_name: :CollectionArtwork
+    class_name: :CollectionArtwork,
+    dependent: :destroy
+
+  has_many :artworks,
+    through: :collection_artworks,
+    source: :artwork
 end
