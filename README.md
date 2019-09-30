@@ -14,6 +14,7 @@ Although we will maintain this conceptual distinction between a user's own artwo
 - Know how to test your API endpoints with Postman
 - Know how to create and destroy join table records via controller methods
 - Know how a nested route works
+- Use polymorphic associations
 
 ## Instructions
 
@@ -73,26 +74,40 @@ which rails # => /Users/username/.rbenv/shims/rails
 bundle install
 ```
 
-#### test API using Postman
+### test API using Postman
 Start Rails server
 `rails s`
 
-In Postman, test these APIs
+In Postman, set url to the correct local port, and test these APIs
 
-##### Users
-- create (POST /users) body: user[username]="user name"
+#### Users
+- create (POST /users). Creates new user. Pass in body params: user[username]
 - destroy (DELETE /users/:id)
 - index (GET /users)
 - show (GET /users/:id)
 - update (PATCH /users/:id)
 
-##### Artworks
-- create (POST /artworks) with body params: user[username]="user name"
+#### Artworks
+- create (POST /artworks). Pass in body params: `artwork[title]`, `artwork[artist_id]`, and `artwork[image_url]`
 - destroy (DELETE /artworks/:id)
 - index (GET /artworks)
 - show (GET /artworks/:id)
 - update (PATCH /artworks/:id)
 
-##### Sharing artworks
-- create (POST /artwork_shares)
-  pass in body params artwork_share[viewer_id] and artwork_share[artwork_id]
+#### Sharing artworks
+- create (POST /artwork_shares). 
+  Pass in body params `artwork_share[viewer_id]` and `artwork_share[artwork_id]`
+- destroy (DELETE /artwork_share/:id). This un-shares an Artwork with a User. To delete a share, the user should issue a DELETE to `/artwork_shares/123`, where 123 is the id of the ArtworkShare to destroy. 
+
+#### User's artworks
+- index (GET /users/:id/artworks). Renders all artworks created by and shared with user with given params[:id] 
+
+#### Comments
+- create (POST /comments). Pass in body params `comment[author_id]` and `comment[artwork_id]`
+- destroy (DELETE /comments/:id). Deletes comment with the given id
+- index (GET /users/:id/comments or /artworks/:id/comments). Renders comments connected to either the user or artwork
+
+#### Search
+- index (POST /users/?query=querystring). Use query string parameter to pass in query. Renders all search results.
+
+
