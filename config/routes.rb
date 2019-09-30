@@ -6,7 +6,7 @@ Rails.application.routes.draw do
     resources :collections, only: [:index]
   end
 
-  resources :artworks, only: [:create, :destroy, :show, :update] do
+  resources :artworks, only: [:create, :destroy, :index, :show, :update] do
     resources :comments, only: [:index]
     member do
       post :like, to: 'artworks#like', as: 'like'

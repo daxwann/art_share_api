@@ -4,6 +4,8 @@ class ArtworksController < ApplicationController
       artworks = Artwork.artworks_for_user_id(params[:user_id])
     elsif params[:collection_id]
       artworks = Artwork.artworks_for_collection_id(params[:collection_id])
+    else
+      artworks = Artwork.all
     end
     render json: artworks
   end

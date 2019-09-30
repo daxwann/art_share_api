@@ -22,7 +22,7 @@ Although we will maintain this conceptual distinction between a user's own artwo
 
 `/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`
 
-#### Make sure to have rbenv installed
+#### Make sure to have rbenv and Ruby installed
 
 ```bash
 # install rbenv
@@ -72,3 +72,27 @@ which rails # => /Users/username/.rbenv/shims/rails
 # in repository directory
 bundle install
 ```
+
+#### test API using Postman
+Start Rails server
+`rails s`
+
+In Postman, test these APIs
+
+##### Users
+- create (POST /users) body: user[username]="user name"
+- destroy (DELETE /users/:id)
+- index (GET /users)
+- show (GET /users/:id)
+- update (PATCH /users/:id)
+
+##### Artworks
+- create (POST /artworks) with body params: user[username]="user name"
+- destroy (DELETE /artworks/:id)
+- index (GET /artworks)
+- show (GET /artworks/:id)
+- update (PATCH /artworks/:id)
+
+##### Sharing artworks
+- create (POST /artwork_shares)
+  pass in body params artwork_share[viewer_id] and artwork_share[artwork_id]
