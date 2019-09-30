@@ -74,7 +74,10 @@ which rails # => /Users/username/.rbenv/shims/rails
 bundle install
 ```
 
-### test API using Postman
+### Test API using Postman
+Check all routes
+`rails routes`
+
 Start Rails server
 `rails s`
 
@@ -110,4 +113,19 @@ In Postman, set url to the correct local port, and test these APIs
 #### Search
 - index (POST /users/?query=querystring). Use query string parameter to pass in query. Renders all search results.
 
+#### Like/Unlike comments or artworks
+- like (POST /artworks/:id/like or /comments/:id/like). Like an artwork or comment. Pass in body params `user_id`.
+- unlike (POST /artworks/:id/unlike or /comments/:id/unlike). Unlike an artwork or comment. Pass in body params `user_id`
+
+#### Favorite/Unfavorite artworks
+- favorite (POST /artwork-shares/:id/favorite or /artworks/:id/favorite). Favorites artwork created by or shared with the user. Pass in body param `user_id` Pass in body param `user_id`. 
+- unfavorite (POST /artwork-shares/:id/unfavorite or /artworks/:id/unfavorite). Pass in body param `user_id`.
+
+#### Create collections, add/remove artworks from collection
+- create (POST /collections). Pass in body params `collection[user_id]` and `collection[name]`
+- index (GET /users/:id/collections). Renders all collections created by user.
+- show (GET /collections/:id). Renders collection with given id.
+- destroy (DELETE /collections/:id). Deletes collection with given id.
+- collection_artwork_add (POST /collections/:collection_id/artworks/:artwork_id/add). Adds artwork with given `artwork_id` to collection with given `collection_id`.
+- collection_artwork_remove (DELETE /collections/:collection_id/artworks/:artwork_id/remove). Removes artwork with given `artwork_id` to collection with given `collection_id`.
 
